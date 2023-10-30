@@ -46,7 +46,7 @@ from ansible.module_utils.basic import AnsibleModule
 def docker_ps(module):
     docker_bin = module.get_bin_path('docker', required=True)
     rc, out, err = module.run_command(
-        [docker_bin, "ps", "--format={{json .}}"])
+        [docker_bin, "ps", "--format=json"])
 
     return rc, out.strip(), err.strip()
 
