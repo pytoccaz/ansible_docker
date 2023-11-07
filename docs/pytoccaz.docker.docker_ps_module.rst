@@ -16,7 +16,7 @@ pytoccaz.docker.docker_ps
 
 Synopsis
 --------
-- Retrieve information on running containers using the `docker ps` command
+- Retrieve information on running containers using the ``docker ps`` command
 
 
 
@@ -32,6 +32,7 @@ Examples
     - name: List running containers
         pytoccaz.docker.docker_ps:
         register: containers_list
+
 
 
 Return Values
@@ -56,12 +57,12 @@ Common return values are documented `here <https://docs.ansible.com/ansible/late
                        / <span style="color: purple">elements=dictionary</span>
                     </div>
                 </td>
-                <td>always</td>
+                <td>success</td>
                 <td>
                             <div>List of containers running on the target host</div>
                     <br/>
                         <div style="font-size: smaller"><b>Sample:</b></div>
-                        <div style="font-size: smaller; color: blue; word-wrap: break-word; word-break: break-all;">[{&#x27;ID&#x27;: &#x27;0274311aef78&#x27;, &#x27;RunningFor&#x27;: &#x27;10 days ago&#x27;, &#x27;Names&#x27;: &#x27;ansible&#x27;, &#x27;...&#x27;: None}]</div>
+                        <div style="font-size: smaller; color: blue; word-wrap: break-word; word-break: break-all;">[{&#x27;ID&#x27;: &#x27;0274311aef78&#x27;, &#x27;RunningFor&#x27;: &#x27;10 days ago&#x27;, &#x27;Names&#x27;: &#x27;web-server&#x27;}]</div>
                 </td>
             </tr>
     </table>

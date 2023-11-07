@@ -1,3 +1,7 @@
+## v1.0.2 (2023-11-07)
+
+- docker_ps: improve doc 
+
 ## v1.0.1 (2023-30-01)
 
 - Fix docker command format option

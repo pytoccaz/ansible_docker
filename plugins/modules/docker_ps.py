@@ -16,7 +16,7 @@ module: docker_ps
 author: "Olivier Bernard (@pytoccaz)"
 short_description: Return information on running containers
 description:
-  - Retrieve information on running containers using the `docker ps` command
+  - Retrieve information on running containers using the C(docker ps) command
 
 '''
 
@@ -25,8 +25,10 @@ results:
     description: |
         List of containers running on the target host
     sample:
-        - {"ID": "0274311aef78", "RunningFor": "10 days ago", "Names": "ansible", ...}
-    returned: always
+        - ID: 0274311aef78
+          RunningFor: 10 days ago
+          Names: web-server
+    returned: success
     type: list
     elements: dict
 
@@ -61,7 +63,7 @@ def main():
     rc, out, err = docker_ps(module)
 
     if rc != 0:
-        module.fail_json(msg="Error running docker stack. {0}".format(err),
+        module.fail_json(msg="Error running docker ps. {0}".format(err),
                          rc=rc, stdout=out, stderr=err)
     else:
         if out:
