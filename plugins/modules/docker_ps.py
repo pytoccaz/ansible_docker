@@ -25,9 +25,13 @@ results:
     description: |
         List of containers running on the target host
     sample:
-        - ID: 0274311aef78
-          RunningFor: 10 days ago
-          Names: web-server
+        - id: e7f4ccdb8680cb1dfca60d57252b031a77d3e060741dda1de662b80c22bf9b60
+          created: 10 days ago
+          names: web-server
+          image: web:latest
+          ports: 80/tcp
+          status: Up 19 minutes
+          command: nginx
     returned: success
     type: list
     elements: dict
@@ -40,15 +44,44 @@ EXAMPLES = '''
     register: containers_list
 
 '''
-
-import json
 from ansible.module_utils.basic import AnsibleModule
+
+
+def parse_output(data):
+    containers = []
+    lines = data.split("\n")
+    for line in lines[1:]:
+        bits = line.split("  ")
+        bits = [bit for bit in bits if bit.strip() != ""]
+        if len(bits) == 7:
+            containers.append({
+                "id": bits[0],
+                "image": bits[1],
+                "command": bits[2],
+                "created": bits[3],
+                "status": bits[4],
+                "ports": bits[5],
+                "names": bits[6],
+            })
+        elif len(bits) == 6:
+            containers.append({
+                "id": bits[0],
+                "image": bits[1],
+                "command": bits[2],
+                "created": bits[3],
+                "status": bits[4],
+                "ports": "",
+                "names": bits[5],
+            })
+
+    return containers
 
 
 def docker_ps(module):
     docker_bin = module.get_bin_path('docker', required=True)
     rc, out, err = module.run_command(
-        [docker_bin, "ps", "--format=json"])
+        [docker_bin, "ps", '--no-trunc']
+    )
 
     return rc, out.strip(), err.strip()
 
@@ -67,9 +100,7 @@ def main():
                          rc=rc, stdout=out, stderr=err)
     else:
         if out:
-            ret = list(
-                json.loads(outitem)
-                for outitem in out.splitlines())
+            ret = parse_output(out)
 
         else:
             ret = []

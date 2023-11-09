@@ -31,7 +31,7 @@ Examples
 
     - name: List running containers
         pytoccaz.docker.docker_ps:
-        register: containers_list
+      register: containers_list
 
 
 
@@ -62,7 +62,7 @@ Common return values are documented `here <https://docs.ansible.com/ansible/late
                             <div>List of containers running on the target host</div>
                     <br/>
                         <div style="font-size: smaller"><b>Sample:</b></div>
-                        <div style="font-size: smaller; color: blue; word-wrap: break-word; word-break: break-all;">[{&#x27;ID&#x27;: &#x27;0274311aef78&#x27;, &#x27;RunningFor&#x27;: &#x27;10 days ago&#x27;, &#x27;Names&#x27;: &#x27;web-server&#x27;}]</div>
+                        <div style="font-size: smaller; color: blue; word-wrap: break-word; word-break: break-all;">[{&#x27;id&#x27;: &#x27;e7f4ccdb8680cb1dfca60d57252b031a77d3e060741dda1de662b80c22bf9b60&#x27;, &#x27;created&#x27;: &#x27;10 days ago&#x27;, &#x27;names&#x27;: &#x27;web-server&#x27;, &#x27;image&#x27;: &#x27;web:latest&#x27;, &#x27;ports&#x27;: &#x27;80/tcp&#x27;, &#x27;status&#x27;: &#x27;Up 19 minutes&#x27;, &#x27;command&#x27;: &#x27;nginx&#x27;}]</div>
                 </td>
             </tr>
     </table>
