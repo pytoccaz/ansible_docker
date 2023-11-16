@@ -18,6 +18,16 @@ short_description: Return information on running containers
 description:
   - Retrieve information on running containers using the C(docker ps) command
 
+version_added: 1.0.0
+
+options:
+    name_contains:
+        description:
+            - Search string to filter container list on names
+        required: false
+        type: str
+        version_added: '2.1.0'
+
 '''
 
 RETURN = '''
@@ -51,8 +61,7 @@ def parse_output(data):
     containers = []
     lines = data.split("\n")
     for line in lines[1:]:
-        bits = line.split("  ")
-        bits = [bit for bit in bits if bit.strip() != ""]
+        bits = [bit.strip() for bit in line.split("  ") if bit.strip() != ""]
         if len(bits) == 7:
             containers.append({
                 "id": bits[0],
@@ -88,11 +97,13 @@ def docker_ps(module):
 
 def main():
     module = AnsibleModule(
-        argument_spec={
-        },
+        argument_spec=dict(
+            name_contains=dict(required=True, type='str'),
+        ),
         supports_check_mode=True
     )
 
+    name_filter = module.params["name_contains"]
     rc, out, err = docker_ps(module)
 
     if rc != 0:
@@ -104,6 +115,9 @@ def main():
 
         else:
             ret = []
+
+    if name_filter is not None:
+        ret = list(filter(lambda item: name_filter in item["names"], ret))
 
         module.exit_json(changed=False,
                          rc=rc,

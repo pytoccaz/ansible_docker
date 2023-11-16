@@ -1,3 +1,8 @@
+## v2.1.0 (2023-11-16)
+
+- docker_ps: strip containers attributes
+- docker_ps: add option name_contains to filter on container names 
+
 ## v2.0.0 (2023-11-09)
 
 - docker_ps: do not use json format output when executing `docker ps` command
