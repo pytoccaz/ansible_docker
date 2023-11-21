@@ -98,7 +98,7 @@ def docker_ps(module):
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            name_contains=dict(required=True, type='str'),
+            name_contains=dict(required=False, type='str'),
         ),
         supports_check_mode=True
     )

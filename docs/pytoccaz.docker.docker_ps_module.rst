@@ -62,7 +62,7 @@ Examples
 
     - name: List running containers
       pytoccaz.docker.docker_ps:
-        register: containers_list
+      register: containers_list
 
 
 

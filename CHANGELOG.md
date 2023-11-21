@@ -1,3 +1,7 @@
+## v2.1.1 (2023-11-21)
+
+- docker_ps: make option name_contains as not required
+
 ## v2.1.0 (2023-11-16)
 
 - docker_ps: strip containers attributes
