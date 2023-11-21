@@ -1,3 +1,8 @@
+## v2.1.2 (2023-11-21)
+
+- docker_ps: fix bad indention of module return block 
+
+
 ## v2.1.1 (2023-11-21)
 
 - docker_ps: make option name_contains as not required

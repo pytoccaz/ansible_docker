@@ -119,11 +119,13 @@ def main():
     if name_filter is not None:
         ret = list(filter(lambda item: name_filter in item["names"], ret))
 
-        module.exit_json(changed=False,
-                         rc=rc,
-                         stdout=out,
-                         stderr=err,
-                         results=ret)
+    module.exit_json(
+        changed=False,
+        rc=rc,
+        stdout=out,
+        stderr=err,
+        results=ret
+    )
 
 
 if __name__ == "__main__":
