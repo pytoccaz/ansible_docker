@@ -14,20 +14,24 @@ DOCUMENTATION = '''
 ---
 module: docker_ps
 author: "Olivier Bernard (@pytoccaz)"
-short_description: Return information on running containers
+short_description: Returns information on running containers
 description:
-  - Retrieve information on running containers using the C(docker ps) command
+  - Retrieves information on running containers using the C(docker ps) command
 
 version_added: 1.0.0
 
 options:
     name_contains:
         description:
-            - Search string to filter container list on names
-        required: false
+            - A search string to filter container list on names
         type: str
         version_added: '2.1.0'
-
+    all:
+        description:
+            - whether to list stopped containers
+        default: false
+        type: bool
+        version_added: '2.2.0'
 '''
 
 RETURN = '''
@@ -87,10 +91,15 @@ def parse_output(data):
 
 
 def docker_ps(module):
-    docker_bin = module.get_bin_path('docker', required=True)
-    rc, out, err = module.run_command(
-        [docker_bin, "ps", '--no-trunc']
-    )
+
+    docker_bin = module.get_bin_path("docker", required=True)
+
+    command = [docker_bin, "ps", "--no-trunc"]
+
+    if module.params["all"] is True:
+        command.append("--all")
+
+    rc, out, err = module.run_command(command)
 
     return rc, out.strip(), err.strip()
 
@@ -99,6 +108,7 @@ def main():
     module = AnsibleModule(
         argument_spec=dict(
             name_contains=dict(required=False, type='str'),
+            all=dict(required=False, type='bool', default=False),
         ),
         supports_check_mode=True
     )

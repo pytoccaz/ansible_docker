@@ -5,7 +5,7 @@
 pytoccaz.docker.docker_ps
 *************************
 
-**Return information on running containers**
+**Returns information on running containers**
 
 
 Version added: 1.0.0
@@ -17,7 +17,7 @@ Version added: 1.0.0
 
 Synopsis
 --------
-- Retrieve information on running containers using the ``docker ps`` command
+- Retrieves information on running containers using the ``docker ps`` command
 
 
 
@@ -36,6 +36,26 @@ Parameters
             <tr>
                 <td colspan="1">
                     <div class="ansibleOptionAnchor" id="parameter-"></div>
+                    <b>all</b>
+                    <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
+                    <div style="font-size: small">
+                        <span style="color: purple">boolean</span>
+                    </div>
+                    <div style="font-style: italic; font-size: small; color: darkgreen">added in 2.2.0</div>
+                </td>
+                <td>
+                        <ul style="margin: 0; padding: 0"><b>Choices:</b>
+                                    <li><div style="color: blue"><b>no</b>&nbsp;&larr;</div></li>
+                                    <li>yes</li>
+                        </ul>
+                </td>
+                <td>
+                        <div>whether to list stopped containers</div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="1">
+                    <div class="ansibleOptionAnchor" id="parameter-"></div>
                     <b>name_contains</b>
                     <a class="ansibleOptionLink" href="#parameter-" title="Permalink to this option"></a>
                     <div style="font-size: small">
@@ -46,7 +66,7 @@ Parameters
                 <td>
                 </td>
                 <td>
-                        <div>Search string to filter container list on names</div>
+                        <div>A search string to filter container list on names</div>
                 </td>
             </tr>
     </table>
@@ -61,8 +81,8 @@ Examples
 .. code-block:: yaml
 
     - name: List running containers
-      pytoccaz.docker.docker_ps:
-      register: containers_list
+        pytoccaz.docker.docker_ps:
+        register: containers_list
 
 
 

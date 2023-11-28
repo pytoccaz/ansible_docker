@@ -21,7 +21,7 @@ ansible-galaxy collection install pytoccaz.docker
 ### Modules
 Name | Description
 --- | ---
-[pytoccaz.docker.docker_ps](https://github.com/pytoccaz/ansible_docker/blob/main/docs/pytoccaz.docker.docker_ps_module.rst)|Return information on running containers
+[pytoccaz.docker.docker_ps](https://github.com/pytoccaz/ansible_docker/blob/main/docs/pytoccaz.docker.docker_ps_module.rst)|Returns information on running containers
 
 <!--end collection content-->
 
